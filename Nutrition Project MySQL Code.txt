@@ -1,0 +1,43 @@
+CREATE DATABASE nutritionproject;
+USE nutritionproject;
+
+CREATE TABLE food_item(
+food_name VARCHAR(50) PRIMARY KEY,
+serving_size VARCHAR(50),
+calories DECIMAL(7, 2),
+protein DECIMAL(7, 2),
+carbs DECIMAL(7, 2),
+total_fat DECIMAL(7, 2),
+saturated_fat DECIMAL(7, 2),
+total_sugar DECIMAL(7, 2),
+added_sugar DECIMAL(7, 2),
+sodium DECIMAL(7, 2),
+cholesterol DECIMAL(7, 2),
+fiber DECIMAL(7, 2)
+);
+
+CREATE TABLE foods_eaten(
+date_eaten DATE, 
+food_name VARCHAR(50),
+serving_size VARCHAR(50),
+servings DECIMAL(6, 2), 
+PRIMARY KEY (date_eaten, food_name),
+FOREIGN KEY (food_name) REFERENCES food_item (food_name)
+ON DELETE CASCADE
+);
+
+CREATE TABLE daily_nutrition(
+date_eaten DATE PRIMARY KEY,
+calories DECIMAL(7, 2),
+protein DECIMAL(7, 2),
+carbs DECIMAL(7, 2),
+total_fat DECIMAL(7, 2),
+saturated_fat DECIMAL(7, 2),
+total_sugar DECIMAL(7, 2),
+added_sugar DECIMAL(7, 2),
+sodium DECIMAL(7, 2),
+cholesterol DECIMAL(7, 2),
+fiber DECIMAL(7, 2),
+FOREIGN KEY (date_eaten) REFERENCES foods_eaten (date_eaten)
+ON DELETE CASCADE
+);
